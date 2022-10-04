@@ -55,25 +55,25 @@ Resources:
           sudo rm -f index.html
           sudo sh -c 'echo "it works! Udagram, Udacity" > index.html'
       ImageId: ami-0ee23bfc74a881de5
-#      AssociatePublicIpAddress: yes
-#      KeyName: udacity-project-key
+      AssociatePublicIpAddress: yes
+      KeyName: udacity-project-key
       SecurityGroups: 
       - Ref: WebServerSecGroup
-      InstanceType: t2.micro
+      InstanceType: t1.micro
       BlockDeviceMappings:
       - DeviceName: "/dev/sdk"
         Ebs:
-          VolumeSize: '10'
+          VolumeSize: '8'
   WebAppGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
       VPCZoneIdentifier:
       - Fn::ImportValue:
-          !Sub ${EnvironmentName}-PRIV-NETS
+          !Sub ${EnvironmentName}-PUB-NETS
       LaunchConfigurationName:
         Ref: WebAppLaunchConfig
-      MinSize: '4'
-      MaxSize: '4'
+      MinSize: '2'
+      MaxSize: '2'
       TargetGroupARNs:
       - Ref: WebAppTargetGroup
   WebAppLB:
