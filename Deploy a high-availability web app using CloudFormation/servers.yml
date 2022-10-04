@@ -5,22 +5,22 @@ Parameters:
 
 Resources:
   LBSecGroup:
-        Type: AWS::EC2::SecurityGroup
-        Properties:
-          GroupDescription: Allow http to our load balancer
-          VpcId:
-            Fn::ImportValue:
-              !Sub "${EnvironmentName}-VPCID"
-          SecurityGroupIngress:
-          - IpProtocol: tcp
-            FromPort: 80
-            ToPort: 80
-            CidrIp: 0.0.0.0/0
-          SecurityGroupEgress:
-          - IpProtocol: tcp
-            FromPort: 80
-            ToPort: 80
-            CidrIp: 0.0.0.0/0
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http to our load balancer
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${EnvironmentName}-VPCID"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
   WebServerSecGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -53,7 +53,7 @@ Resources:
           sudo systemctl start apache2.service
           sudo cd /var/www/html
           sudo echo "Udacity Demo Web Server Up and Running!" > index.html 
-      ImageId: ami-0ee23bfc74a881de5 
+      ImageId: ami-0ee23bfc74a881de5
 #      AssociatePublicIpAddress: yes
 #      KeyName: udacity-project-key
       SecurityGroups: 
